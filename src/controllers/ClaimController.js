@@ -26,6 +26,19 @@ class ClaimController {
     
     }
 
+    //GET/non-approve
+        static async listNonApproveClaim (req,res){
+        try{
+            const claim = await ClaimModel.claimItem.find({
+                statusClaim: {$ne:'aprovada'}
+            });
+            res.status(200).json(claim)
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na requisição `})
+        }
+     
+    }
+
     // POST /user
     static async registerClaim (req,res){
         try{
@@ -48,6 +61,19 @@ class ClaimController {
         }
     }
 
+
+    //PUT/approve
+    static async approveClaims(req,res){
+        try{
+            const id = req.params.id
+            await ClaimModel.claimItem.findByIdAndUpdate(id,{
+                statusClaim: 'aprovada'
+            });
+            res.status(200).json({message:'atualizadA com sucesso'})
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na atualização `})
+        }
+    }
     // DELETE /user/:id
     static async deleteClaim(req,res){
         try{
