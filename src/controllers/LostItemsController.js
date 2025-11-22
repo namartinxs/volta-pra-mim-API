@@ -32,7 +32,7 @@ class LostItemController {
      try {
         const foundByUser = await UserModel.User.findById(req.body.foundBy);
         const administratorUser = await UserModel.User.findById(req.body.receivedBy);
-        
+
         if (!foundByUser || !administratorUser) {
         return res.status(404).json({ message: "Usuário não encontrado" });
         }
@@ -52,11 +52,20 @@ class LostItemController {
         try{
             const user = await UserModel.User.findById(req.body.collectedBy);
 
-        if (!user) {
-        return res.status(404).json({ message: "Usuário não encontrado" });
+            if (!user) {
+                return res.status(404).json({ message: "Usuário não encontrado" });
         }
             const id = req.params.id
-            await LostItem.findByIdAndUpdate(id,req.body);
+            const updatedItem = await LostItem.findByIdAndUpdate(id,{
+                collectedBy: req.body.collectedBy,
+                statusItem: "devolvido"
+            },
+            {new:true}
+        );
+            if(!updatedItem){
+                return res.status(404).json({message: `${error.message} -  falha na atualização `})
+            }
+        
             res.status(200).json({message:' item atualizado com sucesso'})
         }catch(error){
             res.status(500).json({message: `${error.message} -  falha na atualização `})
