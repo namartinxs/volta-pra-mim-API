@@ -1,5 +1,6 @@
 import express from "express"
 import UserController from "../controllers/UsersController.js"
+import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 const routes = express.Router()
 
@@ -21,7 +22,7 @@ const routes = express.Router()
  *       200:
  *         description: Lista de usuários retornada com sucesso
  */
-routes.get('/user', UserController.listUsers)
+routes.get('/user',authMiddleware,  UserController.listUsers)
 
 /**
  * @swagger
@@ -43,7 +44,7 @@ routes.get('/user', UserController.listUsers)
  *       404:
  *         description: Usuário não encontrado
  */
-routes.get('/user/:id', UserController.listUserbyId)
+routes.get('/user/:id',authMiddleware,  UserController.listUserbyId)
 
 /**
  * @swagger
@@ -56,7 +57,7 @@ routes.get('/user/:id', UserController.listUserbyId)
  *       200:
  *         description: Lista de usuários ativos
  */
-routes.get('/non-disable-user', UserController.listNonDisableUsers)
+routes.get('/non-disable-user',authMiddleware,  UserController.listNonDisableUsers)
 
 /**
  * @swagger
@@ -152,7 +153,7 @@ routes.post('/user', UserController.registerUser)
  *       404:
  *         description: Usuário não encontrado
  */
-routes.put('/user/:id', UserController.updateUser)
+routes.put('/user/:id',authMiddleware,  UserController.updateUser)
 
 /**
  * @swagger
@@ -173,7 +174,7 @@ routes.put('/user/:id', UserController.updateUser)
  *       404:
  *         description: Usuário não encontrado
  */
-routes.put('/disable-user/:id', UserController.disableUser)
+routes.put('/disable-user/:id',authMiddleware,  UserController.disableUser)
 
 /**
  * @swagger
@@ -194,6 +195,6 @@ routes.put('/disable-user/:id', UserController.disableUser)
  *       404:
  *         description: Usuário não encontrado
  */
-routes.delete('/user/:id', UserController.deleteUser)
+routes.delete('/user/:id',authMiddleware,  UserController.deleteUser)
 
 export default routes

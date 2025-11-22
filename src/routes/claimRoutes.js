@@ -1,5 +1,6 @@
 import express from "express"
 import ClaimController from "../controllers/ClaimController.js"
+import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 const routes = express.Router()
 
@@ -27,7 +28,7 @@ const routes = express.Router()
  *               items:
  *                 $ref: '#/components/schemas/Claim'
  */
-routes.get('/claim', ClaimController.listClaim)
+routes.get('/claim',authMiddleware,  ClaimController.listClaim)
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ routes.get('/claim', ClaimController.listClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.get('/claim/:id', ClaimController.listClaimbyId)
+routes.get('/claim/:id',authMiddleware,  ClaimController.listClaimbyId)
 
 /**
  * @swagger
@@ -62,7 +63,7 @@ routes.get('/claim/:id', ClaimController.listClaimbyId)
  *       200:
  *         description: Lista de reivindicações não aprovadas
  */
-routes.get('/claim-non-approve', ClaimController.listNonApproveClaim)
+routes.get('/claim-non-approve',authMiddleware,  ClaimController.listNonApproveClaim)
 
 /**
  * @swagger
@@ -104,7 +105,7 @@ routes.get('/claim-non-approve', ClaimController.listNonApproveClaim)
  *       400:
  *         description: Dados inválidos
  */
-routes.post('/claim', ClaimController.registerClaim)
+routes.post('/claim',authMiddleware,  ClaimController.registerClaim)
 
 /**
  * @swagger
@@ -131,7 +132,7 @@ routes.post('/claim', ClaimController.registerClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.put('/claim/:id', ClaimController.updateClaim)
+routes.put('/claim/:id',authMiddleware,  ClaimController.updateClaim)
 
 /**
  * @swagger
@@ -152,7 +153,7 @@ routes.put('/claim/:id', ClaimController.updateClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.put('/approve-claims/:id', ClaimController.approveClaims)
+routes.put('/approve-claims/:id',authMiddleware,  ClaimController.approveClaims)
 
 /**
  * @swagger
@@ -173,6 +174,6 @@ routes.put('/approve-claims/:id', ClaimController.approveClaims)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.delete('/claim/:id', ClaimController.deleteClaim)
+routes.delete('/claim/:id',authMiddleware,  ClaimController.deleteClaim)
 
 export default routes

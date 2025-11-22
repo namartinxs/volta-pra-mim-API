@@ -1,5 +1,6 @@
 import express from "express"
 import SpotController from "../controllers/SpotController.js"
+import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 const routes = express.Router()
 
@@ -21,7 +22,7 @@ const routes = express.Router()
  *       200:
  *         description: Lista de spots retornada com sucesso
  */
-routes.get('/spot', SpotController.listSpot)
+routes.get('/spot',authMiddleware,  SpotController.listSpot)
 
 /**
  * @swagger
@@ -43,7 +44,7 @@ routes.get('/spot', SpotController.listSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.get('/spot/:id', SpotController.listSpotbyId)
+routes.get('/spot/:id',authMiddleware,  SpotController.listSpotbyId)
 
 /**
  * @swagger
@@ -72,7 +73,7 @@ routes.get('/spot/:id', SpotController.listSpotbyId)
  *       400:
  *         description: Dados inválidos
  */
-routes.post('/spot', SpotController.registerSpot)
+routes.post('/spot',authMiddleware,  SpotController.registerSpot)
 
 /**
  * @swagger
@@ -107,7 +108,7 @@ routes.post('/spot', SpotController.registerSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.put('/spot/:id', SpotController.updateSpot)
+routes.put('/spot/:id',authMiddleware,  SpotController.updateSpot)
 
 /**
  * @swagger
@@ -129,6 +130,6 @@ routes.put('/spot/:id', SpotController.updateSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.delete('/spot/:id', SpotController.deleteSpot)
+routes.delete('/spot/:id',authMiddleware,  SpotController.deleteSpot)
 
 export default routes
