@@ -70,7 +70,35 @@ const options = {
           format: "date-time"
         }
       }
+    },
+    schemas: {
+    Spot: {
+      type: "object",
+      required: ["local"],
+      properties: {
+        _id: {
+          type: "string",
+          example: "64fabc123456"
+        },
+        description: {
+          type: "string",
+          example: "Sala para reuniões"
+        },
+        local: {
+          type: "string",
+          example: "Bloco A, Sala 12"
+        },
+        createdAt: {
+          type: "string",
+          format: "date-time"
+        },
+        updatedAt: {
+          type: "string",
+          format: "date-time"
+        }
+      }
     }
+  }
   }
 },
 
