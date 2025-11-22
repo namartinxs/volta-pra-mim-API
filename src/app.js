@@ -5,6 +5,10 @@ import swaggerSpec from "./config/swagger.js"
 import routes from "./routes/index.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const connection = await connectDb()
 
 
