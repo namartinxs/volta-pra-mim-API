@@ -6,7 +6,7 @@ const LostSchema = new mongoose.Schema({
     fileName:{ type: mongoose.Schema.Types.String,required:true},
     statusItem:{type:mongoose.Schema.Types.String,
         enum: ["aguardando_reclamacao", "reclamado", "devolvido"],
-        default: ["aguardando_reclamacao"]
+        default: "aguardando_reclamacao"
     },
     description:{type:mongoose.Schema.Types.String},
     locationFound:{

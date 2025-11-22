@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   email: {type:mongoose.Schema.Types.String,required:true,unique: true},
   status: {
     type: String,
-    enum: ["active", "inactive"],
+    enum: ["ativo", "inativo"],
     required: true
   },
   type: {
