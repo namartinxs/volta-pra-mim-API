@@ -23,6 +23,6 @@ const UserSchema = new mongoose.Schema({
 },{versionKey:false,timestamps:true})
 
 
-const User = mongoose.model("user", UserSchema)
+const User = mongoose.model("user", UserSchema, "user")
 
 export default {User, UserSchema}
