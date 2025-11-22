@@ -1,4 +1,5 @@
 import UserModel from "../models/UserModel.js";
+import bcrypt from "bcryptjs";
 
 
 class UserController {
@@ -42,7 +43,22 @@ class UserController {
     // POST /user
     static async registerUser (req,res){
         try{
-            const newUser = await UserModel.User.create(req.body)
+            const { email, password } = req.body
+          
+            const userExist = await UserModel.User.findOne({email})
+
+            if(userExist){
+                return res.status(400).json({message:'usário ja cadastrado'})
+            }
+
+            const hashedPassword = await bcrypt.hash(password,10)
+
+            const userData = {
+                ...req.body,
+                password: hashedPassword
+            }
+
+            const newUser = await UserModel.User.create(userData)
             res.status(201).json({message:'cadastrado realizado com sucesso',item:newUser})
 
         } catch(error){
