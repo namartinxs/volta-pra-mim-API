@@ -1,4 +1,5 @@
 import LostItem from "../models/LostItemsModel.js";
+import UserModel from "../models/UserModel.js";
 
 class LostItemController {
   
@@ -28,12 +29,37 @@ class LostItemController {
 
     // POST /lost
     static async registerlostItem (req,res){
-        try{
-            const newItem = await LostItem.create(req.body)
-            res.status(201).json({message:'Objeto cadastrado com sucesso',item:newItem})
+     try {
+        const foundByUser = await UserModel.User.findById(req.body.foundBy);
+        const administratorUser = await UserModel.User.findById(req.body.receivedBy);
+        
+        if (!foundByUser || !administratorUser) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
+        }
+        const createdItem = await LostItem.create(req.body);
 
-        } catch(error){
-            res.status(500).json({message: `${error.message} - falha ao cadastrar`})
+        res.status(201).json({
+        message: 'Objeto cadastrado com sucesso',
+        item: createdItem
+        });
+    } catch (error) {
+        res.status(500).json({ message: `${error.message} - falha ao cadastrar` });
+  }
+    }
+
+    // PUT /lost/colleted/:id
+    static async updatecollectedBy (req,res){
+        try{
+            const user = await UserModel.User.findById(req.body.collectedBy);
+
+        if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
+        }
+            const id = req.params.id
+            await LostItem.findByIdAndUpdate(id,req.body);
+            res.status(200).json({message:' item atualizado com sucesso'})
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na atualização `})
         }
     }
 

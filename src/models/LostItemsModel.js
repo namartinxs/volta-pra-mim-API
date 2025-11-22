@@ -9,9 +9,21 @@ const LostSchema = new mongoose.Schema({
         default: ["aguardando_reclamacao"]
     },
     description:{type:mongoose.Schema.Types.String},
-    locationFound:{type:mongoose.Schema.Types.String,required:true},
+    // locationFound:{type:mongoose.Schema.Types.String,required:true},
     dateFound:{type:mongoose.Schema.Types.Date,required:true},
-    
+    foundBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    receivedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    collectedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    dateColleted:{type:mongoose.Schema.Types.Date,required:true}
 
 },{versionKey:false,timestamps:true})
 

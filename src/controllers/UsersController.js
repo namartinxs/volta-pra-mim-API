@@ -1,0 +1,66 @@
+import UserModel from "../models/UserModel.js";
+
+
+class UserController {
+  
+    // GET /user
+    static async listUsers (req,res){
+        try{
+            const listUser = await UserModel.User.find({});
+            res.status(200).json(listUser)
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na requisição `})
+        }
+     
+    }
+
+    // GET /user:id
+
+    static async listUserbyId (req,res){
+        try{
+            const id = req.params.id
+            const User = await UserModel.User.findById(id);
+            res.status(200).json(User)
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na requisição `})
+        }
+    
+    }
+
+    // POST /user
+    static async registerUser (req,res){
+        try{
+            const newUser = await UserModel.User.create(req.body)
+            res.status(201).json({message:'cadastrado realizado com sucesso',item:newUser})
+
+        } catch(error){
+            res.status(500).json({message: `${error.message} - falha ao cadastrar`})
+        }
+    }
+
+    // PUT /user/:id
+    static async updateUser (req,res){
+        try{
+            const id = req.params.id
+            await UserModel.User.findByIdAndUpdate(id,req.body);
+            res.status(200).json({message:' usuario atualizado com sucesso'})
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na atualização `})
+        }
+    }
+
+    // DELETE /user/:id
+    static async deleteUser(req,res){
+        try{
+            const id = req.params.id
+            await UserModel.User.findByIdAndDelete(id);
+            res.status(200).json({message: 'usuario deletado com sucesso'})
+
+        }catch(error){
+            res.status(500).json({message: `${error.message} - falha ao deletar`})
+        }
+    }
+    
+};
+
+export default UserController

@@ -11,6 +11,8 @@ routes.get('/lost-items/:id',LostItemController.listLostItembyId);
 routes.post('/lost-items/',LostItemController.registerlostItem);
 // PUT /lost/:id
 routes.put('/lost-items/:id',LostItemController.updateLostItem);
+// PUT /lost/colleted/:id
+routes.put('/lost-items-colleted/:id',LostItemController.updatecollectedBy);
 // DELETE /lost/:id
 routes.delete('/lost-items/:id',LostItemController.deleteLostItem);
 
