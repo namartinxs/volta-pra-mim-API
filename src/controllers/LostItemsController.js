@@ -1,4 +1,5 @@
 import LostItem from "../models/LostItemsModel.js";
+import SpotModel from "../models/SpotModel.js";
 import UserModel from "../models/UserModel.js";
 
 class LostItemController {
@@ -32,10 +33,19 @@ class LostItemController {
      try {
         const foundByUser = await UserModel.User.findById(req.body.foundBy);
         const administratorUser = await UserModel.User.findById(req.body.receivedBy);
+        const locationFound = await SpotModel.Spot.findById(req.body.locationFound);
 
-        if (!foundByUser || !administratorUser) {
-        return res.status(404).json({ message: "Usuário não encontrado" });
+        if (!locationFound){
+            return res.status(404).json({message: "Localização não encontrada"})
         }
+
+        if (!foundByUser) {
+            return res.status(404).json({ message: "Usuário não encontrado" });
+        }
+         if ( !administratorUser) {
+            return res.status(404).json({ message: "Admin não encontrado" });
+        }
+
         const createdItem = await LostItem.create(req.body);
 
         res.status(201).json({
