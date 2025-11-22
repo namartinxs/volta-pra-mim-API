@@ -34,5 +34,5 @@ const LostSchema = new mongoose.Schema({
 //modelo é um objeto q representa uma colecao na base de dados 
 const LostItem = mongoose.model("lost_item", LostSchema, "lost_item")
 
-
-export default LostItem
+export default {LostItem, LostSchema}
+// export default LostItem

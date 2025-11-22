@@ -1,4 +1,4 @@
-import LostItem from "../models/LostItemsModel.js";
+import LostItemsModel from "../models/LostItemsModel.js";
 import SpotModel from "../models/SpotModel.js";
 import UserModel from "../models/UserModel.js";
 
@@ -7,7 +7,7 @@ class LostItemController {
     // GET /lost
     static async listLostItem (req,res){
         try{
-            const listlostItems = await LostItem.find({});
+            const listlostItems = await LostItemsModel.LostItem.find({});
             res.status(200).json(listlostItems)
         }catch(error){
             res.status(500).json({message: `${error.message} -  falha na requisição `})
@@ -20,7 +20,7 @@ class LostItemController {
     static async listLostItembyId (req,res){
         try{
             const id = req.params.id
-            const lostItem = await LostItem.findById(id);
+            const lostItem = await LostItemsModel.LostItem.findById(id);
             res.status(200).json(lostItem)
         }catch(error){
             res.status(500).json({message: `${error.message} -  falha na requisição `})
@@ -46,7 +46,7 @@ class LostItemController {
             return res.status(404).json({ message: "Admin não encontrado" });
         }
 
-        const createdItem = await LostItem.create(req.body);
+        const createdItem = await LostItemsModel.LostItem.create(req.body);
 
         res.status(201).json({
         message: 'Objeto cadastrado com sucesso',
@@ -66,7 +66,7 @@ class LostItemController {
                 return res.status(404).json({ message: "Usuário não encontrado" });
         }
             const id = req.params.id
-            const updatedItem = await LostItem.findByIdAndUpdate(id,{
+            const updatedItem = await LostItemsModel.LostItem.findByIdAndUpdate(id,{
                 collectedBy: req.body.collectedBy,
                 statusItem: "devolvido"
             },
@@ -86,7 +86,7 @@ class LostItemController {
     static async updateLostItem (req,res){
         try{
             const id = req.params.id
-            await LostItem.findByIdAndUpdate(id,req.body);
+            await LostItemsModel.LostItem.findByIdAndUpdate(id,req.body);
             res.status(200).json({message:' item atualizado com sucesso'})
         }catch(error){
             res.status(500).json({message: `${error.message} -  falha na atualização `})
@@ -97,7 +97,7 @@ class LostItemController {
     static async deleteLostItem(req,res){
         try{
             const id = req.params.id
-            await LostItem.findByIdAndDelete(id);
+            await LostItemsModel.LostItem.findByIdAndDelete(id);
             res.status(200).json({message: 'item deletado com sucesso'})
 
         }catch(error){
