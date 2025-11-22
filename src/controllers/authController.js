@@ -31,8 +31,8 @@ export const login = async(req,res)=>{
         // SALVA NO COOKIES
         res.cookie('token',token,{
             httpOnly: true,
-            secure: false,           // true quando estiver em produção (https)
-            sameSite: "lax",
+            secure: true,                // OBRIGATÓRIO em produção https
+            sameSite: "none",            // Para domínios diferentes
             maxAge: 60 * 60 * 1000   // 1h
         })
 
