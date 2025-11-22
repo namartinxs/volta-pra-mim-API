@@ -24,11 +24,10 @@ export const login = async(req,res)=>{
         // TOKEN
          // process.env.JWT_SECRET, guarda o token no .env
         const token = jwt.sign(
-            {id:user._id},
+            { id: user._id },
             process.env.JWT_SECRET,
-            {expiresIn:'1h'}
-        )
-
+            { expiresIn: process.env.JWT_EXPIRES }
+        );
         // SALVA NO COOKIES
         res.cookie('token',token,{
             httpOnly: true,
