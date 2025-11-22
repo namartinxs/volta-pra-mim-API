@@ -7,6 +7,8 @@ const routes = express.Router()
 routes.get('/lost-items',LostItemController.listLostItem);
 // GET /lost/:id
 routes.get('/lost-items/:id',LostItemController.listLostItembyId);
+// GET /lost/!devolvido
+routes.get('/lost-items-non-return-items',LostItemController.listNonReturnItems)
 // POST /lost
 routes.post('/lost-items/',LostItemController.registerlostItem);
 // PUT /lost/:id

@@ -28,6 +28,20 @@ class LostItemController {
     
     }
 
+    //GET/lost/status !devolvido
+
+    static async listNonReturnItems (req,res){
+        try{
+            const lostItem = await LostItemsModel.LostItem.findById({
+            statusItem: {$ne: 'devolvido'}
+            
+        });
+            res.status(200).json(lostItem)
+        }catch(error){
+            res.status(500).json({message: `${error.message} -  falha na requisição `})
+        }
+    }
+
     // POST /lost
     static async registerlostItem (req,res){
      try {
@@ -104,6 +118,8 @@ class LostItemController {
             res.status(500).json({message: `${error.message} - falha ao deletar`})
         }
     }
+
+
     
 };
 
