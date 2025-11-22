@@ -27,6 +27,18 @@ class UserController {
     
     }
 
+    //GET/non-disableUser
+
+    static async listNonDisableUsers (req,res){
+    try{
+        const listUser = await UserModel.User.find({status:{$ne:'inativo'}});
+        res.status(200).json(listUser)
+    }catch(error){
+        res.status(500).json({message: `${error.message} -  falha na requisição `})
+    }
+     
+    }
+
     // POST /user
     static async registerUser (req,res){
         try{
@@ -47,6 +59,24 @@ class UserController {
         }catch(error){
             res.status(500).json({message: `${error.message} -  falha na atualização `})
         }
+    }
+
+    //PUT/user/inativo
+    static async disableUser (req,res){
+    try{
+        const id = req.params.id
+        const updatedUser = await UserModel.User.findByIdAndUpdate(id,{
+            status:'inativo'
+            },{new:true});
+
+        if(!updatedUser){
+            return res.status(404).json({message: `${error.message} -  falha na atualização `})
+        }
+
+        res.status(200).json({message:' usuario atualizado com sucesso'})
+    }catch(error){
+        res.status(500).json({message: `${error.message} -  falha na atualização `})
+    }
     }
 
     // DELETE /user/:id
