@@ -159,6 +159,68 @@ const options = {
         }
       }
         },
+        Claim: {
+  type: "object",
+  required: ["itemName", "fileName", "statusItem", "dateFound"],
+  properties: {
+    _id: {
+      type: "string",
+      example: "64fa12abc345de6789"
+    },
+    itemName: {
+      type: "string",
+      example: "Mochila preta"
+    },
+    fileName: {
+      type: "string",
+      example: "mochila.jpg"
+    },
+    statusItem: {
+      type: "string",
+      enum: ["aguardando_reclamacao", "reclamado", "devolvido"],
+      example: "aguardando_reclamacao"
+    },
+    description: {
+      type: "string",
+      example: "Mochila encontrada no laboratório"
+    },
+    locationFound: {
+      type: "string",
+      example: "64fa12abc345de6789"
+    },
+    dateFound: {
+      type: "string",
+      format: "date-time",
+      example: "2025-11-22T14:00:00Z"
+    },
+    foundBy: {
+      type: "string",
+      example: "64fa12abc000111222"
+    },
+    receivedBy: {
+      type: "string",
+      example: "64fa12abc333444555"
+    },
+    collectedBy: {
+      type: "string",
+      example: "64fa12abc666777888"
+    },
+    dateColleted: {
+      type: "string",
+      format: "date-time",
+      example: "2025-11-25T10:00:00Z"
+    },
+    createdAt: {
+      type: "string",
+      format: "date-time"
+    },
+    updatedAt: {
+      type: "string",
+      format: "date-time"
+    }
+  }
+}
+
   
   }
 },
