@@ -43,3 +43,14 @@ export const login = async(req,res)=>{
         res.status(500).json({message: 'erro no login'})
     }
 }
+
+export const logout = (req, res) => {
+  // Remove o cookie do token
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,       
+    sameSite: 'none'
+  });
+
+  res.status(200).json({ message: 'Logout realizado com sucesso' });
+};
