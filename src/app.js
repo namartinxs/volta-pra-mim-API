@@ -27,11 +27,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-// // cors dominio diferente
-// app.use(cors({
-//     origin: "http://localhost:3000", // trocar pelo dominio do front
-//     credentials: true
-// }))
+
 
 // doc
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))

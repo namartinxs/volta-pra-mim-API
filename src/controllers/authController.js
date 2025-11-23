@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs"
 import UserModel from "../models/UserModel.js"
 
 export const login = async(req,res)=>{
+    const isProduction = process.env.NODE_ENV === "production";
     try{
         const{email,password} = req.body
 
@@ -29,12 +30,19 @@ export const login = async(req,res)=>{
             { expiresIn: process.env.JWT_EXPIRES }
         );
         // SALVA NO COOKIES
-        res.cookie('token',token,{
+        // res.cookie('token',token,{
+        //     httpOnly: true,
+        //     secure: true,                // OBRIGATÓRIO em produção https
+        //     sameSite: "none",            // Para domínios diferentes
+        //     maxAge: 60 * 60 * 1000   // 1h
+        // })
+
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: true,                // OBRIGATÓRIO em produção https
-            sameSite: "none",            // Para domínios diferentes
-            maxAge: 60 * 60 * 1000   // 1h
-        })
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 60 * 60 * 1000
+        });
 
         res.status(200).json({message:'login realizado com sucesso'})
 
@@ -48,8 +56,8 @@ export const logout = (req, res) => {
   // Remove o cookie do token
   res.clearCookie('token', {
     httpOnly: true,
-    secure: true,       
-    sameSite: 'none'
+    secure: isProduction,
+  sameSite: isProduction ? "none" : "lax"
   });
 
   res.status(200).json({ message: 'Logout realizado com sucesso' });
