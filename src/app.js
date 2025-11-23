@@ -29,7 +29,7 @@ app.use(cookieParser())
 
 // cors dominio diferente
 app.use(cors({
-    origin: "https://volta-pra-mim-front.vercel.app", // trocar pelo dominio do front
+    origin: "http://localhost:3000", // trocar pelo dominio do front
     credentials: true
 }))
 
