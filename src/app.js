@@ -24,16 +24,25 @@ const app = express()
 
 
 // middleware
-app.use(express.json())
+
 app.use(cookieParser())
 
+// // cors dominio diferente // trocar pelo dominio do front
+app.use(cors({
+    origin: [
+    "http://localhost:3000",
+    "https://SEU-FRONT.onrender.com"
+    ],
+    credentials: true
+}))
+app.use(express.json())
 
-
-// doc
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 // rota
 routes(app)
+
+// doc
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 
 export default app
