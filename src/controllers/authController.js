@@ -54,3 +54,23 @@ export const logout = (req, res) => {
 
   res.status(200).json({ message: 'Logout realizado com sucesso' });
 };
+
+export const authValidate  = (req,res)=>{
+    const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ valid: false });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    return res.status(200).json({
+      valid: true,
+      userId: decoded.id
+    });
+
+  } catch (err) {
+    return res.status(401).json({ valid: false });
+  }
+};
