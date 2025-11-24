@@ -1,6 +1,6 @@
 import express from "express"
 import LostItemController from "../controllers/LostItemsController.js"
-import { authMiddleware } from "../middlewares/authMiddleware.js"
+// import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 const routes = express.Router()
 
@@ -28,7 +28,7 @@ const routes = express.Router()
  *               items:
  *                 $ref: '#/components/schemas/LostItem'
  */
-routes.get('/lost-items',authMiddleware, LostItemController.listLostItem)
+routes.get('/lost-items', LostItemController.listLostItem)
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ routes.get('/lost-items',authMiddleware, LostItemController.listLostItem)
  *       404:
  *         description: Item não encontrado
  */
-routes.get('/lost-items/:id',authMiddleware, LostItemController.listLostItembyId)
+routes.get('/lost-items/:id', LostItemController.listLostItembyId)
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ routes.get('/lost-items/:id',authMiddleware, LostItemController.listLostItembyId
  *       200:
  *         description: Lista de itens não devolvidos
  */
-routes.get('/lost-items-non-return-items',authMiddleware, LostItemController.listNonReturnItems)
+routes.get('/lost-items-non-return-items', LostItemController.listNonReturnItems)
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ routes.get('/lost-items-non-return-items',authMiddleware, LostItemController.lis
  *       400:
  *         description: Dados inválidos
  */
-routes.post('/lost-items',authMiddleware, LostItemController.registerlostItem)
+routes.post('/lost-items', LostItemController.registerlostItem)
 
 /**
  * @swagger
@@ -136,7 +136,7 @@ routes.post('/lost-items',authMiddleware, LostItemController.registerlostItem)
  *       404:
  *         description: Item não encontrado
  */
-routes.put('/lost-items/:id', authMiddleware, LostItemController.updateLostItem)
+routes.put('/lost-items/:id', LostItemController.updateLostItem)
 
 /**
  * @swagger
@@ -157,7 +157,7 @@ routes.put('/lost-items/:id', authMiddleware, LostItemController.updateLostItem)
  *       404:
  *         description: Item não encontrado
  */
-routes.put('/lost-items-colleted/:id',authMiddleware,  LostItemController.updatecollectedBy)
+routes.put('/lost-items-colleted/:id',  LostItemController.updatecollectedBy)
 
 /**
  * @swagger
@@ -178,6 +178,6 @@ routes.put('/lost-items-colleted/:id',authMiddleware,  LostItemController.update
  *       404:
  *         description: Item não encontrado
  */
-routes.delete('/lost-items/:id',authMiddleware,  LostItemController.deleteLostItem)
+routes.delete('/lost-items/:id',  LostItemController.deleteLostItem)
 
 export default routes

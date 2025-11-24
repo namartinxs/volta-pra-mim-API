@@ -22,7 +22,7 @@ const routes = express.Router()
  *       200:
  *         description: Lista de spots retornada com sucesso
  */
-routes.get('/spot',authMiddleware,  SpotController.listSpot)
+routes.get('/spot',  SpotController.listSpot)
 
 /**
  * @swagger
@@ -44,7 +44,7 @@ routes.get('/spot',authMiddleware,  SpotController.listSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.get('/spot/:id',authMiddleware,  SpotController.listSpotbyId)
+routes.get('/spot/:id',  SpotController.listSpotbyId)
 
 /**
  * @swagger
@@ -73,7 +73,7 @@ routes.get('/spot/:id',authMiddleware,  SpotController.listSpotbyId)
  *       400:
  *         description: Dados inválidos
  */
-routes.post('/spot',authMiddleware,  SpotController.registerSpot)
+routes.post('/spot', SpotController.registerSpot)
 
 /**
  * @swagger
@@ -108,7 +108,7 @@ routes.post('/spot',authMiddleware,  SpotController.registerSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.put('/spot/:id',authMiddleware,  SpotController.updateSpot)
+routes.put('/spot/:id',  SpotController.updateSpot)
 
 /**
  * @swagger
@@ -130,6 +130,6 @@ routes.put('/spot/:id',authMiddleware,  SpotController.updateSpot)
  *       404:
  *         description: Spot não encontrado
  */
-routes.delete('/spot/:id',authMiddleware,  SpotController.deleteSpot)
+routes.delete('/spot/:id',  SpotController.deleteSpot)
 
 export default routes

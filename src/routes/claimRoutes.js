@@ -28,7 +28,7 @@ const routes = express.Router()
  *               items:
  *                 $ref: '#/components/schemas/Claim'
  */
-routes.get('/claim',authMiddleware,  ClaimController.listClaim)
+routes.get('/claim', ClaimController.listClaim)
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ routes.get('/claim',authMiddleware,  ClaimController.listClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.get('/claim/:id',authMiddleware,  ClaimController.listClaimbyId)
+routes.get('/claim/:id', ClaimController.listClaimbyId)
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ routes.get('/claim/:id',authMiddleware,  ClaimController.listClaimbyId)
  *       200:
  *         description: Lista de reivindicações não aprovadas
  */
-routes.get('/claim-non-approve',authMiddleware,  ClaimController.listNonApproveClaim)
+routes.get('/claim-non-approve', ClaimController.listNonApproveClaim)
 
 /**
  * @swagger
@@ -105,7 +105,7 @@ routes.get('/claim-non-approve',authMiddleware,  ClaimController.listNonApproveC
  *       400:
  *         description: Dados inválidos
  */
-routes.post('/claim',authMiddleware,  ClaimController.registerClaim)
+routes.post('/claim', ClaimController.registerClaim)
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ routes.post('/claim',authMiddleware,  ClaimController.registerClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.put('/claim/:id',authMiddleware,  ClaimController.updateClaim)
+routes.put('/claim/:id', ClaimController.updateClaim)
 
 /**
  * @swagger
@@ -153,7 +153,7 @@ routes.put('/claim/:id',authMiddleware,  ClaimController.updateClaim)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.put('/approve-claims/:id',authMiddleware,  ClaimController.approveClaims)
+routes.put('/approve-claims/:id', ClaimController.approveClaims)
 
 /**
  * @swagger
@@ -174,6 +174,6 @@ routes.put('/approve-claims/:id',authMiddleware,  ClaimController.approveClaims)
  *       404:
  *         description: Reivindicação não encontrada
  */
-routes.delete('/claim/:id',authMiddleware,  ClaimController.deleteClaim)
+routes.delete('/claim/:id', ClaimController.deleteClaim)
 
 export default routes
