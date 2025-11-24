@@ -31,7 +31,7 @@ app.use(cookieParser())
 app.use(cors({
     origin: [
     "http://localhost:3000",
-    "https://SEU-FRONT.onrender.com"
+    "https://volta-pra-mim-frontendcaio.vercel.app"
     ],
     credentials: true
 }))
