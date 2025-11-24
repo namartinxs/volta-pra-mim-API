@@ -32,7 +32,7 @@ class LostItemController {
 
     static async listNonReturnItems (req,res){
         try{
-            const lostItem = await LostItemsModel.LostItem.findById({
+            const lostItem = await LostItemsModel.LostItem.find({
             statusItem: {$ne: 'devolvido'}
             
         });
