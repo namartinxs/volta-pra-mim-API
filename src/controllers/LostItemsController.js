@@ -43,85 +43,85 @@ class LostItemController {
     }
 
     // POST /lost
-    //     static async registerlostItem (req,res){
-    //      try {
-    //         const foundByUser = await UserModel.User.findById(req.body.foundBy);
-    //         const administratorUser = await UserModel.User.findById(req.body.receivedBy);
-    //         const locationFound = await SpotModel.Spot.findById(req.body.locationFound);
+        static async registerlostItem (req,res){
+         try {
+            // const foundByUser = '6921d70befa74ed00bfafaad';
+            // const administratorUser = '6923bdf991f855bd8f4970b6';
+            // const locationFound = await SpotModel.Spot.findById(req.body.locationFound);
 
-    //         if (!locationFound){
-    //             return res.status(404).json({message: "Localização não encontrada"})
+            // if (!locationFound){
+            //     return res.status(404).json({message: "Localização não encontrada"})
+            // }
+
+            // if (!foundByUser) {
+            //     return res.status(404).json({ message: "Usuário não encontrado" });
+            // }
+            //  if ( !administratorUser) {
+            //     return res.status(404).json({ message: "Admin não encontrado" });
+            // }
+
+            const createdItem = await LostItemsModel.LostItem.create(req.body);
+
+            res.status(201).json({
+            message: 'Objeto cadastrado com sucesso',
+            item: createdItem
+            });
+        } catch (error) {
+            res.status(500).json({ message: `${error.message} - falha ao cadastrar` });
+      }
+        }
+
+    // static async registerlostItem(req, res) {
+    //     try {
+    //         const { foundBy, receivedBy, locationFound, ...rest } = req.body;
+
+    //         // Verificando se os IDs foram enviados
+    //         if (!foundBy) {
+    //             return res.status(400).json({ message: "ID do usuário que encontrou é obrigatório" });
     //         }
+
+    //         if (!receivedBy) {
+    //             return res.status(400).json({ message: "ID do administrador é obrigatório" });
+    //         }
+
+    //         if (!locationFound) {
+    //             return res.status(400).json({ message: "ID da localização é obrigatório" });
+    //         }
+
+    //         // Buscando no banco
+    //         const foundByUser = await UserModel.User.findById(foundBy);
+    //         const administratorUser = await UserModel.User.findById(receivedBy);
+    //         const location = await SpotModel.Spot.findById(locationFound);
 
     //         if (!foundByUser) {
     //             return res.status(404).json({ message: "Usuário não encontrado" });
     //         }
-    //          if ( !administratorUser) {
+
+    //         if (!administratorUser) {
     //             return res.status(404).json({ message: "Admin não encontrado" });
     //         }
 
-    //         const createdItem = await LostItemsModel.LostItem.create(req.body);
+    //         if (!location) {
+    //             return res.status(404).json({ message: "Localização não encontrada" });
+    //         }
 
-    //         res.status(201).json({
-    //         message: 'Objeto cadastrado com sucesso',
-    //         item: createdItem
+    //         // Criando o item de forma segura
+    //         const createdItem = await LostItemsModel.LostItem.create({
+    //             ...rest,
+    //             foundBy,
+    //             receivedBy,
+    //             locationFound
     //         });
+
+    //         return res.status(201).json({
+    //             message: "Objeto cadastrado com sucesso",
+    //             item: createdItem
+    //         });
+
     //     } catch (error) {
-    //         res.status(500).json({ message: `${error.message} - falha ao cadastrar` });
-    //   }
+    //         return res.status(500).json({ message: `${error.message} - falha ao cadastrar` });
     //     }
-
-    static async registerlostItem(req, res) {
-        try {
-            const { foundBy, receivedBy, locationFound, ...rest } = req.body;
-
-            // Verificando se os IDs foram enviados
-            if (!foundBy) {
-                return res.status(400).json({ message: "ID do usuário que encontrou é obrigatório" });
-            }
-
-            if (!receivedBy) {
-                return res.status(400).json({ message: "ID do administrador é obrigatório" });
-            }
-
-            if (!locationFound) {
-                return res.status(400).json({ message: "ID da localização é obrigatório" });
-            }
-
-            // Buscando no banco
-            const foundByUser = await UserModel.User.findById(foundBy);
-            const administratorUser = await UserModel.User.findById(receivedBy);
-            const location = await SpotModel.Spot.findById(locationFound);
-
-            if (!foundByUser) {
-                return res.status(404).json({ message: "Usuário não encontrado" });
-            }
-
-            if (!administratorUser) {
-                return res.status(404).json({ message: "Admin não encontrado" });
-            }
-
-            if (!location) {
-                return res.status(404).json({ message: "Localização não encontrada" });
-            }
-
-            // Criando o item de forma segura
-            const createdItem = await LostItemsModel.LostItem.create({
-                ...rest,
-                foundBy,
-                receivedBy,
-                locationFound
-            });
-
-            return res.status(201).json({
-                message: "Objeto cadastrado com sucesso",
-                item: createdItem
-            });
-
-        } catch (error) {
-            return res.status(500).json({ message: `${error.message} - falha ao cadastrar` });
-        }
-    }
+    // }
 
 
     // PUT /lost/colleted/:id
