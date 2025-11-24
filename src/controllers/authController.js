@@ -53,6 +53,7 @@ export const login = async(req,res)=>{
 }
 
 export const logout = (req, res) => {
+  const isProduction = process.env.NODE_ENV === "production";
   // Remove o cookie do token
   res.clearCookie('token', {
     httpOnly: true,
